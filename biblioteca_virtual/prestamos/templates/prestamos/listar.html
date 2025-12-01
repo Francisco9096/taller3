@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Préstamos</title>
+</head>
+<body>
+    <h1>Lista de Préstamos</h1>
+    <a href="{% url 'crear_prestamo' %}">Nuevo préstamo</a>
+    
+    <ul>
+    {% for prestamo in prestamos %}
+        <li>
+            <strong>{{ prestamo.usuario }}</strong> - 
+            {{ prestamo.libro.titulo }}
+            (Prestado: {{ prestamo.fecha_prestamo|date:"d/m/Y" }})
+            <a href="{% url 'editar_prestamo' prestamo.id %}">Editar</a>
+            <a href="{% url 'eliminar_prestamo' prestamo.id %}">Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay préstamos</li>
+    {% endfor %}
+    </ul>
+    
+    <!-- ENLACE CORREGIDO: -->
+    <a href="{% url 'listar_libros' %}">Ver Libros</a>
+</body>
+</html>

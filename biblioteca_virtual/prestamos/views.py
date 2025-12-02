@@ -29,8 +29,17 @@ def editar_prestamo(request, id):
     else:
         form = PrestamoForm(instance=prestamo)
     return render(request, 'prestamos/form_prestamo.html', {'form': form})
-
+'''
 def eliminar_prestamo(request, id):
     prestamo = get_object_or_404(Prestamo, id=id)
     prestamo.delete()
     return redirect('listar_prestamos')
+'''
+def eliminar_prestamo(request, id):
+    prestamo = get_object_or_404(Prestamo, id=id)
+    
+    if request.method == 'POST':
+        prestamo.delete()
+        return redirect('listar_prestamos')
+    
+    return render(request, 'prestamos/confirmar_eliminar.html', {'prestamo': prestamo})
